@@ -1,0 +1,73 @@
+/* ====================
+Typography
+===================== */
+.title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+/* ====================
+Layout
+===================== */
+body {
+    margin: 0;
+}
+header {
+    height: 50vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chooseGamePlay {
+    display:flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.chooseGamePlay button {
+    height: 4em;
+    width:100%;
+    font-size: 1rem;
+}
+
+.grid {
+    display:grid;
+    width: 450px;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, 150px);
+
+}
+.grid div {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    height: 150px;
+    border:1px solid black;
+}
+div .border-top-none {
+    border-top:none;
+}
+div .border-left-none {
+    border-left: none;
+}
+
+div .border-bottom-none {
+    border-bottom: none;
+}
+
+div .border-right-none {
+    border-right: none;
+}
+.back {
+    margin-top: 2em;
+    text-align: center;
+    
+}
+a button {
+    font-size: 3rem;
+    text-decoration: none;
+    color: black;
+}

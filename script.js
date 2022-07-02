@@ -1,13 +1,33 @@
+const chooseGamePlay = (() => {
+    const gamePlayOption = document.querySelectorAll(".gamePlayOption");
+    [].forEach.call(gamePlayOption, (item, i) => {
+        item.addEventListener('click', (e) => {
+            let gamePlay;
+            if (e.target.id == 'cpu') { gamePlay = 'cpu'}
+            if (e.target.id == 'pvp') { gamePlay = 'pvp'}
+        })
+    });
+    const getGamePlay = () => { gamePlay; }
+    return { 
+        getGamePlay,
+    };
+})();
+
+
 const Player = (name, marker) => {
     const getMarker = () => marker;
     const getName = () => name;
-    return { getMarker, getName };
+    return { 
+        getMarker, 
+        getName,
+    };
 }
 
 const Gameboard = (() => {
     const grid = document.querySelector('.grid');
     const p1 = Player('Player 1', 'X');
     const p2 = Player('Player 2', 'O');
+
     let board = ['0', '1', '2',
                  '3', '4', '5',
                  '6', '7', '8',
@@ -18,21 +38,6 @@ const Gameboard = (() => {
                  '6', '7', '8',
         ];
         turn = 2;
-        const tiles = document.querySelectorAll(".grid div");
-        [].forEach.call(tiles, function(item, i) {
-            item.addEventListener('click', (e) => {
-                checkIfMarked(e);
-                if (isMarked === true) {
-                    alert("Tile is taken. Please choose another.");
-                    return;
-                }
-                updateTurn();
-                if (turn == 1) { e.target.innerText = p1.getMarker(); }
-                else if (turn == 2) { e.target.innerText = p2.getMarker(); }
-                updateBoard(e);
-                checkWinCondition();
-            });
-        });
     }
 
     const makeGameBoard = () => {
@@ -50,16 +55,33 @@ const Gameboard = (() => {
             }
             grid.appendChild(gridDiv);
         }
+
+        const tiles = document.querySelectorAll(".grid div");
+        [].forEach.call(tiles, function(item, i) {
+            item.addEventListener('click', (e) => {
+                checkIfMarked(e);
+                if (isMarked === true) {
+                    alert("Tile is taken. Please choose another.");
+                    return;
+                }
+                updateTurn();
+                if (turn == 1) { e.target.innerText = p1.getMarker(); }
+                else if (turn == 2) { e.target.innerText = p2.getMarker(); }
+                updateBoard(e);
+                checkWinCondition();
+            });
+        });
     }
     makeGameBoard();
 
-    const displayWinner = (name) => {
+    const displayWinner = (winner) => {
         const modal = document.querySelector('.modal');
         const h2 = document.querySelector('h2');
         const playAgain = document.querySelector('.playAgain');
 
-
-        h2.textContent = name + " wins!"
+        if (winner == 'draw') { h2.textContent = "Draw!" }
+        else { h2.textContent = winner + " wins!"; }
+        
         playAgain.addEventListener('click', () => {
             modal.style.display = 'none';
             grid.innerHTML = "";
@@ -70,7 +92,6 @@ const Gameboard = (() => {
     }
 
     const checkWinCondition = () => {
-        let winCondition = false;
         let i = 0;
         let j = 1;
         while (i <= 6) {
@@ -85,18 +106,18 @@ const Gameboard = (() => {
         while (i < 3) {
             j = i;
             if ((board[j] == board[j+3]) && (board[j+3] == board[j+6]) && (board[j] == board[j+6])) {
-                if (board[i] == p1.getMarker()) { displayWinner(p1.getName()); }
-                else if (board[i] == p2.getMarker()) { displayWinner(p2.getName())}
+                if (board[j] == p1.getMarker()) { displayWinner(p1.getName()); }
+                else if (board[j] == p2.getMarker()) { displayWinner(p2.getName())}
             }
             i++;
         }
         if ((board[0] == board[4]) && (board[4] == board[8]) && (board[0] == board[8])) {
-            if (board[i] == p1.getMarker()) { displayWinner(p1.getName()); }
-                else if (board[i] == p2.getMarker()) { displayWinner(p2.getName())}
+            if (board[0] == p1.getMarker()) { displayWinner(p1.getName()); }
+                else if (board[0] == p2.getMarker()) { displayWinner(p2.getName())}
         } else if ((board[2] == board[4]) && (board[4] == board[6]) && (board[2] == board[6])) {
-            if (board[i] == p1.getMarker()) { displayWinner(p1.getName()); }
-                else if (board[i] == p2.getMarker()) { displayWinner(p2.getName())}
-        }
+            if (board[2] == p1.getMarker()) { displayWinner(p1.getName()); }
+                else if (board[2] == p2.getMarker()) { displayWinner(p2.getName())}
+        }//else if (board.length == 9) { displayWinner('draw')}
     }
 
     const updateBoard = (e) => {
@@ -121,25 +142,8 @@ const Gameboard = (() => {
         if (e.target.innerText == "X" || e.target.innerText == "O") { isMarked = true; }
         else { isMarked = false; }
     }
-
-    const tiles = document.querySelectorAll(".grid div");
-    [].forEach.call(tiles, function(item, i) {
-        item.addEventListener('click', (e) => {
-            checkIfMarked(e);
-            if (isMarked === true) {
-                alert("Tile is taken. Please choose another.");
-                return;
-            }
-            updateTurn();
-            if (turn == 1) { e.target.innerText = p1.getMarker(); }
-            else if (turn == 2) { e.target.innerText = p2.getMarker(); }
-            updateBoard(e);
-            checkWinCondition();
-        });
-    });
 })();
 
+const cpuGamePlay = () => {
 
-
-
-
+}

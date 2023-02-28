@@ -1,0 +1,55 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1em;
+}
+.Board {
+  display: grid;
+  width: fit-content;
+  background-color: black;
+  gap: 3px;
+}
+.Cell {
+  display: flex;
+  align-items: center;
+  height: 125px;
+  width: 125px;
+  background-color: white;
+  justify-content: center;
+  font-size: 6rem;
+  font-weight: bold;
+}
+.win-message-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.9);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  color: white;
+}
+.win-text {
+  font-size: 3rem;
+}
+.win-btn {
+  font-size: 3rem;
+  padding: .2em;
+  border: none;
+  cursor: pointer;
+}
+.win-btn:hover {
+  background-color: black;
+  color: white;
+}
+.btn {
+  margin-top: 2em;
+  padding: .2em;
+  font-size: 1.2rem;
+}

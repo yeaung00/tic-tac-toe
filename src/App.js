@@ -12,7 +12,7 @@ function App() {
   const [hasWon, setHasWon] = useState(false);
   const [isTied, setIsTied] = useState(false);
   const [winConditions, setWinConditions] = useState(gameServices.createWinConditions(3));
-  console.log(board)
+
   useEffect(() => {
     if (cpu.isPlaying && !xTurn && !hasWon) {
       const mark = xTurn ? "X" : "O";
@@ -25,7 +25,6 @@ function App() {
       setBoard([...board]);
       setHasWon(gameServices.checkWinCondition(winConditions, board, mark))
       setXTurn(!xTurn);
-
     }
   }, [board])
   const restartGame = () => {
@@ -53,11 +52,15 @@ function App() {
     setBoard(Array(newSize * newSize).fill(null).map((item, i) => i));
     setWinConditions(gameServices.createWinConditions(newSize));
   }
+  const handleDiffChange = e => {
+    setCpu(prevCpu => ({...prevCpu, diff: e.target.value }));
+    restartGame();
+  }
   return (
     <div className="App">
       <GameOptions 
         handleGridChange={handleGridChange}
-        setCpu={setCpu}
+        handleDiffChange={handleDiffChange}
         cpu={cpu}
       />
       <p>{xTurn ? "X's turn" : "O's turn"}</p>

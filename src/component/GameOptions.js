@@ -1,6 +1,6 @@
 import React from 'react'
 
-function GameOptions({ handleGridChange, setCpu, cpu }) {
+function GameOptions({ handleGridChange, handleDiffChange, cpu }) {
   return (
     <div>
       <select onChange={handleGridChange}>
@@ -10,12 +10,11 @@ function GameOptions({ handleGridChange, setCpu, cpu }) {
         <option value={6}>6x6</option>
       </select>
       {cpu.isPlaying &&
-        <select onChange={(e) => setCpu(prevCpu => ({...prevCpu, diff: e.target.value }))}>
+        <select onChange={handleDiffChange}>
           <option value='easy'>Easy</option>
           <option value='impossible'>Impossible</option>
         </select>
       }
-
     </div>
   )
 }
